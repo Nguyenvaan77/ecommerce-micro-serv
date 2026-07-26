@@ -1,7 +1,14 @@
 # Phase 1
 
 ## Mục tiêu:
-- Xây dựng library common sử dụng chung cho toàn bộ dự án
+- Trước mắt xây dựng `common-core` cho các service Java/Spring Boot.
+
+## Trạng thái
+
+- `common-core` đã được triển khai và đang chờ người dùng nghiệm thu.
+- Kế hoạch triển khai chi tiết: [common-library-implementation-plan.md](common-library-implementation-plan.md).
+- Danh sách 7 module bên dưới là roadmap ban đầu. Phạm vi triển khai hiện tại chỉ có `common-core`; các module còn lại thực hiện sau.
+- Nhật ký được ghi ngay tại [done/25-07.md](done/25-07.md); từng mục được đánh dấu `ĐÃ XÁC NHẬN` hoặc `CHƯA XÁC NHẬN`.
 
 ## Các bước đánh giá và triển khai:
 - Bước 1: Đánh giá xem project hiện tại nên triển khai library gì. Ghi vào file README.md
@@ -75,7 +82,12 @@ Hệ sinh thái `common-lib` được chia thành **7 module quan trọng**, tu�
 
 ---
 
-## Commit log những thay đổi của bạn: Yêu cầu ghi rõ tiêu đề, type, description, thời gian thực hiện (hh:mm:ss AM/PM - day/month/year để theo dõi)
-| Tiêu đề | Type | Description | Thời gian thực hiện |
-| :--- | :--- | :--- | :--- |
-| Plan chi tiết 7 common modules | `PLANNING` / `DOCS` | Thêm kế hoạch chi tiết cho 7 modules theo đúng Bước 1 & Bước 2 (vì sao cần, giải quyết bài toán gì, scope dịch vụ sử dụng và hướng triển khai) | `02:45:46 PM - 25/07/2026` |
+## Nhật ký thay đổi
+
+Nhật ký chi tiết theo ngày: [done/25-07.md](done/25-07.md).
+
+| Tiêu đề | Type | Description | Thời gian thực hiện | Xác nhận |
+| :--- | :--- | :--- | :--- | :--- |
+| Plan chi tiết 7 common modules | `PLANNING` / `DOCS` | Thêm kế hoạch chi tiết cho 7 module theo Bước 1 và Bước 2; roadmap này chưa đồng nghĩa với triển khai toàn bộ. | `02:45:46 PM - 25/07/2026` | `CHƯA XÁC NHẬN` |
+| Kế hoạch triển khai `common-core` | `PLANNING` | Thu gọn phạm vi trước mắt còn common core Java. | Trước `04:19:00 PM - 25/07/2026` | `ĐÃ XÁC NHẬN` |
+| Triển khai `common-core` | `CODE` / `CONFIG` / `TEST` / `DOCS` | Hoàn thiện mã nguồn, auto-configuration, i18n, Maven Wrapper, README và 28 test. | `04:25:49 PM - 25/07/2026` | `CHƯA XÁC NHẬN` |
