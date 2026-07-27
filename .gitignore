@@ -1,2 +1,8 @@
 .agents
 .claude
+**/target/
+.idea/
+*.iml
+.vscode
+.env
+.mvn/*
