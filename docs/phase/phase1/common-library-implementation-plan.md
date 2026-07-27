@@ -2,9 +2,10 @@
 
 ## Trạng thái
 
-- Trạng thái: `IMPLEMENTED — AWAITING USER REVIEW`
+- Trạng thái: `COMPLETED — SCOPE CLOSED AT common-core`
 - Mã nguồn và test đã hoàn thành.
-- Đã ghi nhật ký tại [done/25-07.md](done/25-07.md). Các kết quả triển khai giữ trạng thái `CHƯA XÁC NHẬN` cho đến khi người dùng nghiệm thu.
+- Người dùng đã chốt Phase 1 tại `common-core`; các common library khác được hoãn đến khi có consumer thực tế.
+- Đã ghi nhật ký tại [done/25-07.md](done/25-07.md) và [done/27-07.md](done/27-07.md).
 
 ## Mục tiêu
 
@@ -141,12 +142,12 @@ Chưa tạo BOM hoặc tách nhiều Spring Boot starter ở bước này. Chỉ
 - [x] Message hoạt động với tiếng Anh, tiếng Việt và fallback.
 - [x] Toàn bộ 28 test pass.
 - [x] Ghi nhật ký thay đổi ngay khi thực hiện và đánh dấu trạng thái xác nhận.
-- [ ] Người dùng review và đồng ý kết quả.
-- [ ] Sau khi người dùng đồng ý, cập nhật các mục triển khai trong nhật ký thành `ĐÃ XÁC NHẬN`.
+- [x] Người dùng đồng ý dừng Phase 1 sau `common-core` và chuyển sang Phase 2.
+- [x] Cập nhật các mục triển khai trong nhật ký thành `ĐÃ XÁC NHẬN`.
 
 ## Backlog sau `common-core`
 
-Các nội dung sau chưa triển khai trong lần này:
+Các nội dung sau chưa triển khai và chỉ được kích hoạt khi có consumer thực tế:
 
 - `common-security`
 - `common-logging` hoặc observability

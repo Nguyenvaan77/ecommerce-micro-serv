@@ -1,38 +1,69 @@
-# Phase 2 — Infrastructure & Security Setup
+# Phase 2 — Hạ tầng local tối thiểu
 
-## Mục tiêu
+## Trạng thái
 
-- Xây dựng hạ tầng local ổn định bằng Docker Compose.
-- Thiết lập PostgreSQL, Redis, Elasticsearch, Kafka KRaft và Keycloak.
-- Chuẩn hóa cấu hình, health check, dữ liệu khởi tạo và bảo mật cho môi trường phát triển.
+- Chiến lược triển khai theo nhu cầu: `ĐÃ XÁC NHẬN`.
+- Milestone hiện tại: `Phase 2A — Docker Compose + PostgreSQL`.
+- Kế hoạch chi tiết và phạm vi superuser-only: `ĐÃ XÁC NHẬN`.
+- Trạng thái triển khai: `COMPLETED — USER CONFIRMED`.
+- Thời gian nghiệm thu: `01:12:13 - 27/07/2026`.
 
-## Các bước đánh giá và triển khai
+## Nguyên tắc
 
-1. Đánh giá phiên bản, tài nguyên và cổng sử dụng của từng thành phần.
-2. Thiết kế Docker Compose, network, volume, health check và biến môi trường.
-3. Khởi tạo Keycloak realm, client, role và kiểm thử JWT.
-4. Khởi tạo Kafka topic, retention, retry topic và dead-letter topic cơ bản.
-5. Kiểm thử kết nối từ service mẫu tới từng thành phần hạ tầng.
-6. Chỉ triển khai sau khi kế hoạch chi tiết được người dùng đồng ý.
+- Không cài toàn bộ tech stack chỉ để “chuẩn bị trước”.
+- Mỗi thành phần phải có consumer đầu tiên và acceptance test cụ thể.
+- Chỉ một milestone hạ tầng được active tại một thời điểm.
+- Dùng Docker Compose cho local; chưa đưa Kubernetes, Prometheus hoặc công cụ quản trị GUI vào giai đoạn này.
+- Mỗi service sở hữu database của mình; không dùng chung schema giữa các service.
 
-## Phạm vi
+## Phạm vi thực hiện trước — Phase 2A
 
-- PostgreSQL
-- Redis
-- Elasticsearch
-- Kafka ở chế độ KRaft
-- Keycloak
-- Docker Compose và cấu hình local
-- `auth-service` nếu cần logic nghiệp vụ ngoài Keycloak
+- Chuẩn hóa `docker-compose.yml`.
+- Chạy duy nhất PostgreSQL 16.x.
+- Thêm cấu hình môi trường mẫu, volume và health check.
+- Chỉ khởi tạo superuser `postgres` và database mặc định `postgres`.
+- Chưa tạo role, database, init script hoặc schema nghiệp vụ riêng.
+- Thêm Makefile cho up, down, restart, clear và kiểm chứng.
+- Viết runbook vận hành và kiểm chứng dữ liệu tồn tại sau restart.
 
-## Tiêu chí hoàn thành
+Kế hoạch thực thi: [basic-infrastructure-implementation-plan.md](basic-infrastructure-implementation-plan.md).
 
-- Các container khởi động ổn định và có health check.
-- Dữ liệu được giữ qua lần restart bằng volume.
-- Có thể cấp và xác thực JWT từ Keycloak.
-- Producer và consumer mẫu trao đổi được Kafka event.
-- Cấu hình bí mật không được commit trực tiếp vào repository.
+Runbook: [postgres-local-runbook.md](postgres-local-runbook.md).
 
-## Nhật ký cải tiến
+## Kết quả kiểm chứng
 
-Ghi các cải tiến theo ngày tại thư mục `done/` với tên file `day-month.md`.
+- PostgreSQL thực tế: `16.14`.
+- Container: `healthy`.
+- Kết nối host: `127.0.0.1:55432` do port `5432` đang được PostgreSQL khác sử dụng.
+- User/database: `postgres` / `postgres`.
+- Named volume: `ecommerce-micro_postgres-data`.
+- Default network: `ecommerce-micro_default`.
+- Dữ liệu tồn tại qua `make restart` và `make down`/`make up`.
+- Bảng smoke test đã được xóa sau khi kiểm chứng.
+
+## Thành phần hoãn
+
+| Thành phần | Điều kiện kích hoạt |
+| :--- | :--- |
+| Keycloak | Có endpoint cần bảo vệ và ít nhất một Spring Resource Server cần xác thực JWT. |
+| Redis | `inventory-service` có use case cache TTL hoặc distributed lock cụ thể. |
+| Kafka KRaft | Có event contract cùng ít nhất một producer và một consumer. |
+| Elasticsearch | Bắt đầu `search-service` ở Phase 6. |
+| `auth-service` | Có logic nghiệp vụ mà Keycloak không đáp ứng; không tạo wrapper rỗng. |
+| Prometheus/Grafana/tracing backend | Có service chạy thực tế và cần thu thập metrics hoặc trace tập trung. |
+
+## Tiêu chí hoàn thành Phase 2A
+
+- `docker compose config` hợp lệ.
+- Chỉ PostgreSQL được khởi động cho milestone hiện tại.
+- PostgreSQL chuyển sang trạng thái `healthy`.
+- Kết nối và chạy được `SELECT 1` bằng superuser `postgres`.
+- Dữ liệu còn nguyên sau `restart` và chu kỳ `down`/`up` không kèm `-v`.
+- `.env` không được Git theo dõi; `.env.example` không chứa secret thật.
+- Có hướng dẫn start, stop, log, health, connect và reset dữ liệu.
+- Không có Redis, Kafka, Keycloak hoặc Elasticsearch chạy khi chưa đạt activation gate.
+
+## Nhật ký
+
+- [25-07.md](done/25-07.md): khởi tạo cấu trúc tài liệu.
+- [27-07.md](done/27-07.md): chốt chiến lược tối thiểu và lập kế hoạch Phase 2A.

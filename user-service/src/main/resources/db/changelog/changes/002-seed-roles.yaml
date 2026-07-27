@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002-seed-roles
+      author: ecommerce
+      changes:
+        - insert:
+            schemaName: user_service
+            tableName: roles
+            columns:
+              - column:
+                  name: role_name
+                  value: CUSTOMER
+        - insert:
+            schemaName: user_service
+            tableName: roles
+            columns:
+              - column:
+                  name: role_name
+                  value: PM
+        - insert:
+            schemaName: user_service
+            tableName: roles
+            columns:
+              - column:
+                  name: role_name
+                  value: ADMIN

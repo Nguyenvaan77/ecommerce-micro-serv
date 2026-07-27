@@ -5,9 +5,10 @@
 
 ## Trạng thái
 
-- `common-core` đã được triển khai và đang chờ người dùng nghiệm thu.
+- Phase 1 đã chốt phạm vi ở `common-core`; không triển khai toàn bộ common library khi chưa có consumer thực tế.
+- `common-core` đã được triển khai, kiểm chứng 28/28 test và có trong commit `1f9bc53`.
 - Kế hoạch triển khai chi tiết: [common-library-implementation-plan.md](common-library-implementation-plan.md).
-- Danh sách 7 module bên dưới là roadmap ban đầu. Phạm vi triển khai hiện tại chỉ có `common-core`; các module còn lại thực hiện sau.
+- Danh sách 7 module bên dưới là roadmap tham khảo. Các module còn lại chỉ triển khai theo nhu cầu của service ở phase sau.
 - Nhật ký được ghi ngay tại [done/25-07.md](done/25-07.md); từng mục được đánh dấu `ĐÃ XÁC NHẬN` hoặc `CHƯA XÁC NHẬN`.
 
 ## Các bước đánh giá và triển khai:
@@ -90,4 +91,4 @@ Nhật ký chi tiết theo ngày: [done/25-07.md](done/25-07.md).
 | :--- | :--- | :--- | :--- | :--- |
 | Plan chi tiết 7 common modules | `PLANNING` / `DOCS` | Thêm kế hoạch chi tiết cho 7 module theo Bước 1 và Bước 2; roadmap này chưa đồng nghĩa với triển khai toàn bộ. | `02:45:46 PM - 25/07/2026` | `CHƯA XÁC NHẬN` |
 | Kế hoạch triển khai `common-core` | `PLANNING` | Thu gọn phạm vi trước mắt còn common core Java. | Trước `04:19:00 PM - 25/07/2026` | `ĐÃ XÁC NHẬN` |
-| Triển khai `common-core` | `CODE` / `CONFIG` / `TEST` / `DOCS` | Hoàn thiện mã nguồn, auto-configuration, i18n, Maven Wrapper, README và 28 test. | `04:25:49 PM - 25/07/2026` | `CHƯA XÁC NHẬN` |
+| Triển khai `common-core` | `CODE` / `CONFIG` / `TEST` / `DOCS` | Hoàn thiện mã nguồn, auto-configuration, i18n, Maven Wrapper, README và 28 test. | `04:25:49 PM - 25/07/2026` | `ĐÃ XÁC NHẬN` — 27/07/2026 |
